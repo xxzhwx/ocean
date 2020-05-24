@@ -38,6 +38,8 @@ typedef HANDLE      LFWK_ThreadHandle;
 typedef DWORD       LFWK_ThreadID;
 typedef sockaddr_in LFWK_SockAddr;
 typedef int         LFWK_SockLenType;
+typedef LPTHREAD_START_ROUTINE LFWK_ThreadFunc;
+typedef LPVOID                 LFWK_ThreadArg;
 
 #define LFWK_INVALID_HANDLE ((::HANDLE)(LONG_PTR)-1)
 #define LFWK_INVALID_SOCKET INVALID_SOCKET
@@ -57,6 +59,8 @@ typedef int         LFWK_ThreadHandle;
 typedef int         LFWK_ThreadID;
 typedef sockaddr_in LFWK_SockAddr;
 typedef socklen_t   LFWK_SockLenType;
+typedef void* (*LFWK_ThreadFunc)(void*);
+typedef void* LFWK_ThreadArg;
 
 #define SOCKET_ERROR (-1)
 #define LFWK_INVALID_HANDLE (-1)

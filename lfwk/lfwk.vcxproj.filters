@@ -7,6 +7,12 @@
     <Filter Include="src">
       <UniqueIdentifier>{20740f69-74cd-4183-9a2c-87b79b829139}</UniqueIdentifier>
     </Filter>
+    <Filter Include="include\network">
+      <UniqueIdentifier>{4c0101cc-cec2-4cac-88f4-9a292dff6911}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\network">
+      <UniqueIdentifier>{361bd6d9-898b-4e2f-b788-9f0c34569bcc}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\socket_api.h">
@@ -18,10 +24,36 @@
     <ClInclude Include="include\datapacket.h">
       <Filter>include</Filter>
     </ClInclude>
+    <ClInclude Include="include\mutex.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\thread_agent.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\thread_api.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\network\socket.h">
+      <Filter>include\network</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\socket_api.cpp">
       <Filter>src</Filter>
     </ClCompile>
+    <ClCompile Include="src\mutex.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\thread_api.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\network\socket.cpp">
+      <Filter>src\network</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="include\thread_agent.inl">
+      <Filter>include</Filter>
+    </None>
   </ItemGroup>
 </Project>

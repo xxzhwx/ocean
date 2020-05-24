@@ -21,10 +21,20 @@
   <ItemGroup>
     <ClInclude Include="include\datapacket.h" />
     <ClInclude Include="include\def.h" />
+    <ClInclude Include="include\mutex.h" />
+    <ClInclude Include="include\network\socket.h" />
     <ClInclude Include="include\socket_api.h" />
+    <ClInclude Include="include\thread_agent.h" />
+    <ClInclude Include="include\thread_api.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\mutex.cpp" />
+    <ClCompile Include="src\network\socket.cpp" />
     <ClCompile Include="src\socket_api.cpp" />
+    <ClCompile Include="src\thread_api.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="include\thread_agent.inl" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>15.0</VCProjectVersion>
@@ -98,7 +108,7 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_DEBUG;_CONSOLE;_WINSOCK_DEPRECATED_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <AdditionalIncludeDirectories>$(ProjectDir)include\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
