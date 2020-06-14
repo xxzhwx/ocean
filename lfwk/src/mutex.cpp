@@ -7,7 +7,7 @@ Mutex::Mutex()
 #ifdef _MSC_VER
     InitializeCriticalSection(&handle_);
 #else
-    pthread_mutex_init(&handle_, NULL);
+    pthread_mutex_init(&handle_, NULL); // Non Reentrant
 #endif
 }
 

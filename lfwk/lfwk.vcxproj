@@ -23,7 +23,9 @@
     <ClInclude Include="include\def.h" />
     <ClInclude Include="include\mutex.h" />
     <ClInclude Include="include\network\service.h" />
+    <ClInclude Include="include\network\session.h" />
     <ClInclude Include="include\network\socket.h" />
+    <ClInclude Include="include\safe_queue.h" />
     <ClInclude Include="include\socket_api.h" />
     <ClInclude Include="include\thread_agent.h" />
     <ClInclude Include="include\thread_api.h" />
@@ -31,6 +33,7 @@
   <ItemGroup>
     <ClCompile Include="src\mutex.cpp" />
     <ClCompile Include="src\network\service.cpp" />
+    <ClCompile Include="src\network\session.cpp" />
     <ClCompile Include="src\network\socket.cpp" />
     <ClCompile Include="src\socket_api.cpp" />
     <ClCompile Include="src\thread_api.cpp" />

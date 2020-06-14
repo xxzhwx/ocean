@@ -42,8 +42,8 @@ public:
     int Listen(int backlog = 5);
     int Connect(const char *host, int port);
 
-    virtual int Recv(void *buf, int len, int flags = 0);
-    virtual int Send(void *buf, int len, int flags = 0);
+    int Recv(char *buf, int len, int flags = 0);
+    int Send(char *buf, int len, int flags = 0);
 
 protected:
     virtual void OnConnected() {}

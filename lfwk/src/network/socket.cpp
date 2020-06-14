@@ -94,9 +94,9 @@ int Socket::Connect(const char *host, int port)
     return 0;
 }
 
-int Socket::Recv(void *buf, int len, int flags /* = 0 */)
+int Socket::Recv(char *buf, int len, int flags /* = 0 */)
 {
-    int numOfBytes = ::recv(handle_, (char*)buf, len, flags);
+    int numOfBytes = ::recv(handle_, buf, len, flags);
 
     if (numOfBytes == 0)
     {
@@ -134,35 +134,32 @@ int Socket::Recv(void *buf, int len, int flags /* = 0 */)
     return numOfBytes; // number of bytes received
 }
 
-int Socket::Send(void *buf, int len, int flags /* = 0 */)
+int Socket::Send(char *buf, int len, int flags /* = 0 */)
 {
-    char* ptr = (char*)buf;
-
     int totalBytes = 0;
 
     while (len > 0)
     {
-        int numOfBytes = ::send(handle_, ptr, len, flags);
+        int numOfBytes = ::send(handle_, buf, len, flags);
 
         if (numOfBytes > 0)
         {
             totalBytes += numOfBytes;
-            ptr += numOfBytes;
+            buf += numOfBytes;
             len -= numOfBytes;
             continue;
         }
 
         if (numOfBytes == SOCKET_ERROR)
         {
+            int errNo = 0;
+#ifdef _MSC_VER
+            errNo = ::WSAGetLastError();
+#else
+            errNo = errno;
+#endif
             if (!block_)
             {
-                int errNo = 0;
-#ifdef _MSC_VER
-                errNo = ::WSAGetLastError();
-#else
-                errNo = errno;
-#endif
-
 #ifdef _MSC_VER
                 if (errNo != WSAEWOULDBLOCK)
 #else
@@ -173,8 +170,13 @@ int Socket::Send(void *buf, int len, int flags /* = 0 */)
                     return -1;
                 }
             }
+            else
+            {
+                HandleEv_Error(errNo);
+                return -1;
+            }
 
-            break;
+            break; // if would block, return totalBytes
         }
     }
 

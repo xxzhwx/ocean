@@ -39,6 +39,12 @@
     <ClInclude Include="include\network\service.h">
       <Filter>include\network</Filter>
     </ClInclude>
+    <ClInclude Include="include\network\session.h">
+      <Filter>include\network</Filter>
+    </ClInclude>
+    <ClInclude Include="include\safe_queue.h">
+      <Filter>include</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\socket_api.cpp">
@@ -54,6 +60,9 @@
       <Filter>src\network</Filter>
     </ClCompile>
     <ClCompile Include="src\network\service.cpp">
+      <Filter>src\network</Filter>
+    </ClCompile>
+    <ClCompile Include="src\network\session.cpp">
       <Filter>src\network</Filter>
     </ClCompile>
   </ItemGroup>
