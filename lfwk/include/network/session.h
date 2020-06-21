@@ -16,6 +16,7 @@ public:
     virtual ~Session();
 
     void InitSocket(LFWK_SocketHandle handle);
+    void SetRecvSize(size_t size) { recv_size_ = size; }
 
     virtual void OnRun();
 
@@ -26,7 +27,11 @@ public:
     void SendToSocket();
 
 private:
+    void OnRecv(); //从接收缓冲区接收完整的包并处理
+
+private:
     DataPacket *recv_buf_;
+    size_t recv_size_; //每次从套接字读取的最大字节数
     SafeQueue<DataPacket*> send_queue_;
 
     Socket *socket_;

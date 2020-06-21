@@ -222,6 +222,22 @@ public:
         wpos_ = wpos;
     }
 
+    char* GetWritePtr() const
+    {
+        return data_ + wpos_;
+    }
+
+    void AddWpos(size_t len)
+    {
+        if (wpos_ + len > length_)
+        {
+            ASSERT(false);
+            return;
+        }
+
+        wpos_ += len;
+    }
+
     char* GetReadPtr() const
     {
         return data_ + rpos_;
@@ -236,6 +252,11 @@ public:
         }
 
         rpos_ += len;
+    }
+
+    size_t GetLength()
+    {
+        return length_;
     }
 
     void Expand(size_t newLength)

@@ -3,14 +3,15 @@
 NS_BEGIN_LFWK
 
 Session::Session() :
+    recv_size_(2048),
     socket_(NULL)
 {
-
+    recv_buf_ = new DataPacket();
 }
 
 Session::~Session()
 {
-
+    SAFE_DELETE(recv_buf_);
 }
 
 void Session::InitSocket(LFWK_SocketHandle handle)
@@ -38,7 +39,54 @@ void Session::FlushPacket(DataPacket* packet)
 
 void Session::RecvFromSocket()
 {
+    int totalRecvSize = 0;
 
+    while (true)
+    {
+        const size_t writableSize = recv_buf_->GetWritableSize();
+        if (writableSize < recv_size_)
+        {
+            size_t length = recv_buf_->GetLength();
+            size_t newLength = length + recv_size_ * 2;
+            recv_buf_->Expand(newLength);
+        }
+
+        int recvSize = socket_->Recv(recv_buf_->GetWritePtr(), (int)recv_size_);
+
+        if (recvSize <= 0)
+            break;
+
+        recv_buf_->AddWpos(recvSize);
+        totalRecvSize += recvSize;
+
+        //超过2M则break，尝试先处理
+        if (recv_buf_->GetReadableSize() >= 2 * 1024 * 1024)
+            break;
+    }
+
+    if (totalRecvSize > 0)
+    {
+        OnRecv();
+    }
+}
+
+void Session::OnRecv()
+{
+    //连接已断开则丢弃剩余的数据
+    if (!socket_->IsConnected())
+    {
+        recv_buf_->SetRpos(0);
+        recv_buf_->SetWpos(0);
+        return;
+    }
+
+    //没数据可处理
+    if (recv_buf_->GetReadableSize() == 0)
+    {
+        return;
+    }
+
+    //todo
 }
 
 void Session::SendToSocket()
