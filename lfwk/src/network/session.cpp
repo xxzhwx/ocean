@@ -52,15 +52,31 @@ void Session::SendToSocket()
     DataPacket *packet;
     while (send_queue_.Peek(packet))
     {
-        int sentBytes = 0;
         size_t readableSize = packet->GetReadableSize();
-        if (readableSize > 0)
+        if (readableSize == 0)
         {
-            sentBytes = socket_->Send(packet->GetReadPtr(), (int)readableSize);
+            DataPacket* tmp;
+            send_queue_.Dequeue(tmp);
+            SAFE_DELETE(tmp);
 
-            if (sentBytes <= 0)
-            {
-            }
+            continue;
+        }
+
+        int sentBytes = socket_->Send(packet->GetReadPtr(), (int)readableSize);
+
+        if (sentBytes <= 0)
+            break;
+
+        if (sentBytes >= readableSize)
+        {
+            DataPacket* tmp;
+            send_queue_.Dequeue(tmp);
+            SAFE_DELETE(tmp);
+        }
+        else
+        {
+            packet->AddRpos(sentBytes);
+            break;
         }
     }
 }
