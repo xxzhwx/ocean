@@ -45,6 +45,9 @@
     <ClInclude Include="include\safe_queue.h">
       <Filter>include</Filter>
     </ClInclude>
+    <ClInclude Include="include\network\net_def.h">
+      <Filter>include\network</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\socket_api.cpp">

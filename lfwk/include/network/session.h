@@ -18,16 +18,19 @@ public:
     void InitSocket(LFWK_SocketHandle handle);
     void SetRecvSize(size_t size) { recv_size_ = size; }
 
-    virtual void OnRun();
-
-    DataPacket* AllocPacket(uint8 sysId, uint8 cmd);
+    DataPacket* AllocPacket(uint32 opcode);
     void FlushPacket(DataPacket* packet);
+
+    virtual void OnRun();
 
     void RecvFromSocket();
     void SendToSocket();
 
 private:
     void OnRecv(); //从接收缓冲区接收完整的包并处理
+
+protected:
+    virtual void OnHandlePacket(uint32 opcode, char* buf, size_t size);
 
 private:
     DataPacket *recv_buf_;

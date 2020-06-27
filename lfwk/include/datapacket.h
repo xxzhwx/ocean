@@ -280,6 +280,11 @@ public:
         length_ = newLength;
     }
 
+    char* GetData()
+    {
+        return data_;
+    }
+
 private:
     char *data_;
     size_t length_;
