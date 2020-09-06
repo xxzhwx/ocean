@@ -3,6 +3,7 @@ template<typename ObjectType>
 ThreadAgent<ObjectType>::ThreadAgent() :
     _handle(LFWK_INVALID_HANDLE)
 {
+
 }
 
 template<typename ObjectType>

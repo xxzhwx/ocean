@@ -21,6 +21,7 @@
   <ItemGroup>
     <ClInclude Include="include\datapacket.h" />
     <ClInclude Include="include\def.h" />
+    <ClInclude Include="include\lfwk.h" />
     <ClInclude Include="include\mutex.h" />
     <ClInclude Include="include\network\net_def.h" />
     <ClInclude Include="include\network\service.h" />

@@ -48,6 +48,9 @@
     <ClInclude Include="include\network\net_def.h">
       <Filter>include\network</Filter>
     </ClInclude>
+    <ClInclude Include="include\lfwk.h">
+      <Filter>include</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\socket_api.cpp">

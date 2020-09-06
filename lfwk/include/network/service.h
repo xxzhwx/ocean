@@ -14,11 +14,11 @@ public:
     virtual ~Service();
 
 public:
-    void SetHost(const string& host) { host_ = host; }
-    void SetPort(int port) { port_ = port; }
-    const string& GetName() const { return name_; }
-    const string& GetHost() const { return host_; }
-    int GetPort() const { return port_; }
+    void SetHost(const string& host) { _host = host; }
+    void SetPort(int port) { _port = port; }
+    const string& GetName() const { return _name; }
+    const string& GetHost() const { return _host; }
+    int GetPort() const { return _port; }
 
     bool Startup();
     void Shutdown();
@@ -28,12 +28,14 @@ public:
     void OnClientSvc();
 
 private:
-    string name_; // the service name
-    string host_; // the listening host
-    int port_;    // the listening port
+    string _name; // the service name
+    string _host; // the listening host
+    int _port;    // the listening port
 
-    ThreadAgent<Service> accept_thread_;
-    ThreadAgent<Service> client_thread_;
+    ThreadAgent<Service> _accept_thread;
+    ThreadAgent<Service> _client_thread;
+    bool _accept_running;
+    bool _client_running;
 };
 
 NS_END_LFWK
